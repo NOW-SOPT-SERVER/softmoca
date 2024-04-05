@@ -14,7 +14,7 @@ public class TestController {
 
     @GetMapping("/test/json")
     public ApiResponse testJson() {
-        return ApiResponse.create("1차 세미나 테스트 API - JSON  test");
+        return ApiResponse.create("1차 세미나 테스트 API - JSON  application ignore test commit");
     }
 
 }
