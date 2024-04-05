@@ -36,6 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-
-practice/src/main/resources/application.yml
+application.yml
 
