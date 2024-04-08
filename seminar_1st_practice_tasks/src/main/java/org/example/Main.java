@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.classes.Account;
 import org.example.classes.Customer;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final Map<String, Customer> customers = new HashMap<>();
+    private static final Map<String, Account> customers = new HashMap<>();
     public static void main(String[] args) {
         System.out.print("생성할 고객 수 입력 > ");
         int customerCount = scanner.nextInt();
@@ -23,15 +24,15 @@ public class Main {
             System.out.print("초기 잔액 입력 > ");
             int initialBalance = scanner.nextInt();
             scanner.nextLine(); // consume newline
-            customers.put(accountNumber, new Customer(name, accountNumber, initialBalance));
+            customers.put(accountNumber, new Account(name, accountNumber, initialBalance));
         }
 
         while (true) {
             System.out.print("로그인(계좌번호 입력) > ");
             String loginAccountNumber = scanner.nextLine();
-            Customer currentCustomer = customers.get(loginAccountNumber);
+            Account currentAccount = customers.get(loginAccountNumber);
 
-            if (currentCustomer == null) {
+            if (currentAccount == null) {
                 System.out.println("계좌번호가 잘못되었습니다.");
                 continue;
             }
@@ -58,13 +59,13 @@ public class Main {
                         System.out.print("예금 금액 입력 > ");
                         int depositAmount = scanner.nextInt();
                         scanner.nextLine(); // consume newline
-                        currentCustomer.deposit(depositAmount);
+                        currentAccount.deposit(depositAmount);
                         break;
                     case 2:
                         System.out.print("출금 금액 입력 > ");
                         int withdrawAmount = scanner.nextInt();
                         scanner.nextLine(); // consume newline
-                        currentCustomer.withdraw(withdrawAmount);
+                        currentAccount.withdraw(withdrawAmount);
                         break;
                     case 3:
                         System.out.print("이체할 계좌번호 입력 > ");
@@ -76,14 +77,14 @@ public class Main {
                             System.out.print("이체 금액 입력 > ");
                             int transferAmount = scanner.nextInt();
                             scanner.nextLine(); // consume newline
-                            currentCustomer.transfer(receiver, transferAmount);
+                            currentAccount.transfer(receiver, transferAmount);
                         }
                         break;
                     case 4:
-                        System.out.println("잔액: " + currentCustomer.balance + "원");
+                        System.out.println("잔액: " + currentAccount.balance + "원");
                         break;
                     case 5:
-                        currentCustomer.printHistory();
+                        currentAccount.printHistory();
                         break;
                     case 0:
                         System.out.println("로그아웃되었습니다.");
