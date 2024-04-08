@@ -1,57 +1,15 @@
 package org.example;
 
+import org.example.classes.Customer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-class Customer {
-    String name;
-    String accountNumber;
-    int balance;
-    Map<String, Integer> history;
-
-    Customer(String name, String accountNumber, int balance) {
-        this.name = name;
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.history = new HashMap<>();
-    }
-
-    void deposit(int amount) {
-        balance += amount;
-        history.put("Deposit", amount);
-    }
-
-    void withdraw(int amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            history.put("Withdraw", amount);
-        } else {
-            System.out.println("잔액이 부족합니다.");
-        }
-    }
-
-    void transfer(Customer receiver, int amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            receiver.balance += amount;
-            history.put("Transfer to " + receiver.accountNumber, amount);
-        } else {
-            System.out.println("잔액이 부족합니다.");
-        }
-    }
-
-    void printHistory() {
-        for (Map.Entry<String, Integer> entry : history.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-    }
-}
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Map<String, Customer> customers = new HashMap<>();
-
     public static void main(String[] args) {
         System.out.print("생성할 고객 수 입력 > ");
         int customerCount = scanner.nextInt();
