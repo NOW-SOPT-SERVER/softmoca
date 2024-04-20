@@ -9,6 +9,8 @@ import org.spot.pratice.service.dto.MemberCreateDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -16,13 +18,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public String createMember(
+    public Member createMember(
             MemberCreateDto memberCreate
     ) {
-        Member member = memberRepository.save(Member.create(memberCreate.name(), memberCreate.part(), memberCreate.age()));
-        memberRepository.save(member);
-        return member.getId().toString();
+        Member member = Member.create(memberCreate.name(), memberCreate.part(), memberCreate.age());
+        return memberRepository.save(member);
     }
+
 
     private Member findMemberById(
             Long memberId
@@ -39,10 +41,23 @@ public class MemberService {
     }
 
     @Transactional
-    public void deleteMember(
+    public Member deleteMember(
             Long memberId
     ) {
-        memberRepository.delete(findMemberById(memberId));
+        Member member = findMemberById(memberId);
+        memberRepository.delete(member);
+        return member;
     }
+
+
+    public List<MemberFindDto> getAllMembers() {
+        List<Member> memberList = memberRepository.findAll();
+        return memberList.stream()
+                .map(MemberFindDto::of)
+                .collect(java.util.stream.Collectors.toList());
+    }
+
+
+
 
 }
