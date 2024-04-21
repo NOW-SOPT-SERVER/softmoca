@@ -2,6 +2,8 @@ package org.spot.pratice.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.spot.pratice.common.exception.NotFoundException;
+import org.spot.pratice.common.exception.message.ErrorMessage;
 import org.spot.pratice.service.dto.MemberFindDto;
 import org.spot.pratice.domain.Member;
 import org.spot.pratice.repository.MemberRepository;
@@ -25,6 +27,13 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+
+
+    public Member findById(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND)
+        );
+    }
 
     private Member findMemberById(
             Long memberId
