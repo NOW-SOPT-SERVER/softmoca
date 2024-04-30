@@ -23,8 +23,6 @@ public class Blog extends BaseTimeEntity {
 
     private String description;
 
-
-
     @Builder
     public Blog(Member member, String title, String description) {
         this.member = member;

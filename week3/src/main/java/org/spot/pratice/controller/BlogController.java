@@ -21,7 +21,7 @@ public class BlogController {
 
     private final BlogService blogService;
 
-    @PostMapping("/blog")
+    @PostMapping("/blog") //블로그 생성
     public ResponseEntity<SuccessStatusResponse> createBlog(
             @RequestHeader Long memberId,
             @RequestBody BlogCreateRequest blogCreateRequest) {
