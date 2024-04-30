@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.spot.pratice.service.dto.BlogCreateRequest;
+import org.spot.pratice.service.dto.BlogCreateRequestDTO;
 
 @Entity
 @Getter
@@ -33,7 +33,7 @@ public class Blog extends BaseTimeEntity {
 
     public static Blog create(
             Member member,
-            BlogCreateRequest blogCreateRequest
+            BlogCreateRequestDTO blogCreateRequest
     ) {
         return new Blog(member, blogCreateRequest.title(), blogCreateRequest.description());
     }

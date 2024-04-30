@@ -5,14 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.spot.pratice.common.dto.SuccessMessage;
 import org.spot.pratice.common.dto.SuccessStatusResponse;
 import org.spot.pratice.service.BlogService;
-import org.spot.pratice.service.dto.BlogCreateRequest;
-import org.spot.pratice.service.dto.BlogTitleUpdateRequest;
+import org.spot.pratice.service.dto.BlogCreateRequestDTO;
+import org.spot.pratice.service.dto.BlogTitleUpdateRequestDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,7 +21,7 @@ public class BlogController {
     @PostMapping("/blog") //블로그 생성
     public ResponseEntity<SuccessStatusResponse> createBlog(
             @RequestHeader Long memberId,
-            @RequestBody BlogCreateRequest blogCreateRequest) {
+            @RequestBody BlogCreateRequestDTO blogCreateRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).header(
                         "Location",
                         blogService.create(memberId, blogCreateRequest))
@@ -35,7 +32,7 @@ public class BlogController {
     @PatchMapping("/blog/{blogId}/title")
     public ResponseEntity updateBlogTitle(
             @PathVariable Long blogId,
-            @Valid @RequestBody BlogTitleUpdateRequest blogTitleUdpateRequest
+            @Valid @RequestBody BlogTitleUpdateRequestDTO blogTitleUdpateRequest
     ) {
         blogService.updateTitle(blogId, blogTitleUdpateRequest);
         return ResponseEntity.noContent().build();

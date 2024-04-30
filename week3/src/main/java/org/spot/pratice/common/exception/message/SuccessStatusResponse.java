@@ -1,5 +1,4 @@
-package org.spot.pratice.common.dto;
-
+package org.spot.pratice.common.exception.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -18,4 +17,3 @@ public record SuccessStatusResponse<T>(
         return new SuccessStatusResponse<T>(successMessage.getStatus(),successMessage.getMessage(),data);
     }
 }
-

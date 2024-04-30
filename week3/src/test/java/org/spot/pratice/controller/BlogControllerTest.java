@@ -2,7 +2,6 @@ package org.spot.pratice.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,7 @@ import org.spot.pratice.repository.BlogRepository;
 import org.spot.pratice.repository.MemberRepository;
 import org.spot.pratice.service.BlogService;
 import org.spot.pratice.service.MemberService;
-import org.spot.pratice.service.dto.BlogCreateRequest;
+import org.spot.pratice.service.dto.BlogCreateRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -54,7 +53,7 @@ public class BlogControllerTest {
         @DisplayName("Blog 생성 실패 테스트")
         public void createBlogSuccess() throws Exception {
             //given
-            String request = objectMapper.writeValueAsString(new BlogCreateRequest("영철이네 블로그", "블로그입니다."));
+            String request = objectMapper.writeValueAsString(new BlogCreateRequestDTO("영철이네 블로그", "블로그입니다."));
             //when
             mockMvc.perform(
                             post("/api/v1/blog")

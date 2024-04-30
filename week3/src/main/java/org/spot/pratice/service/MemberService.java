@@ -28,19 +28,8 @@ public class MemberService {
     }
 
 
-
-    public Member findById(Long memberId) {
-        return memberRepository.findById(memberId).orElseThrow(
-                () -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND)
-        );
-    }
-
-    private Member findMemberById(
-            Long memberId
-    ) {
-        return memberRepository.findById(memberId).orElseThrow(
-                () -> new EntityNotFoundException("ID에 해당하는 사용자가 존재하지 않습니다.")
-        );
+    protected Member findMemberById(final Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(() -> new NotFoundException(ErrorMessage.MEMBER_NOT_FOUND));
     }
 
     public MemberFindDto getMemberById(

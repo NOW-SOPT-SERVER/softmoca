@@ -1,6 +1,6 @@
 package org.spot.pratice.service.dto;
 
-public record BlogCreateRequest(
+public record BlogCreateRequestDTO(
         String title,
         String description
 ) {
